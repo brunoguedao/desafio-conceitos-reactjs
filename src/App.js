@@ -14,17 +14,17 @@ function App() {
 
   async function handleAddRepository() {
     const response = await api.post('repositories', {
+      url: 'https://github.com/brunoguedao',
       title: `Novo Repositório ${Date.now()}`,
+      techs: ['React', 'Node.js'],
     });
-
     const repository = response.data;
-
     setRepositories([...repositories, repository]);
   }
 
   async function handleRemoveRepository(id) {
     await api.delete(`repositories/${id}`);
-    setRepositories([...repositories]);
+    setRepositories(repositories.filter((repository) => repository.id !== id));
   }
 
   return (
